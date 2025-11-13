@@ -89,10 +89,54 @@
     <h4>Profile Update Failed!</h4>
     <p class="error-message">We encountered an issue while updating your profile.</p>
     <p class="text-muted">Please try again later or contact support if the problem persists.</p>
-    <a href="{% url 'userprofile:dashboard' %}" class="btn-home mt-3">
+    <a href="{% url 'userprofile:dashboard' %}" class="btn-home mt-3"  style=" background: linear-gradient(135deg, #eb252f 0%, #7c3aed 100%);">
       <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
     </a>
   </div>
+  <!-- 🌍 Auto Detect + Remember + Translate -->
+<div id="google_translate_element" style="display:none;"></div>
+
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      autoDisplay: false
+    }, 'google_translate_element');
+
+    // Delay to ensure translate dropdown is injected
+    setTimeout(() => {
+      const supportedLangs = ['en','es','fr','de','it','pt','ru','zh-CN','ja','ar'];
+
+      // Try to load saved language from localStorage
+      let userLang = localStorage.getItem('userLang');
+
+      // If not saved, detect from browser
+      if (!userLang) {
+        userLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+        if (!supportedLangs.includes(userLang)) userLang = 'en';
+      }
+
+      // Automatically translate if not English
+      const select = document.querySelector('select.goog-te-combo');
+      if (select && userLang !== 'en') {
+        select.value = userLang;
+        select.dispatchEvent(new Event('change'));
+      }
+
+      // Watch for manual language changes and save them
+      if (select) {
+        select.addEventListener('change', () => {
+          localStorage.setItem('userLang', select.value);
+        });
+      }
+    }, 1000);
+  }
+</script>
+
+<!-- Google Translate script -->
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
 </body>
+
 </html>

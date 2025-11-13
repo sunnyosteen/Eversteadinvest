@@ -41,8 +41,7 @@
             border-radius: 4px;
             padding: 10px 10px;
             color: #ffffff;
-            background: linear-gradient(135deg, #4e46de, #6a5eff, #8b84ff);
-            cursor: pointer;
+            background: linear-gradient(135deg, #eb252f 0%, #a832a3 50%, #610606 100%) !important;            cursor: pointer;
             border: none;
             margin-top: 6px;
         }
@@ -121,30 +120,30 @@
      
   </section>
 
-<h2 class="text-center mt-5 mb-5 m-auto" 
-    style="background: linear-gradient(135deg, #4e46de, #6a5eff, #8b84ff);
-           -webkit-background-clip: text;
-           -webkit-text-fill-color: transparent;
-           font-family: 'Poppins', sans-serif;
-           font-weight: 700;
-           font-size: 2rem;">
-    WealthNetTrader
-</h2>
- 
-
   <div class="container">
-    <div class="text-center">
-        <h2 style="color: #6a5eff;">Withdrawal Successful!</h2>
-        <p class="lead">Hi <strong><b>{{ user_name|capfirst }}</b>,</strong> Your withdrawal of <strong style="color: #6a5eff;">${{ amount_withdrawn }}</strong> has been successfully placed, but is pending approval.</p>
-        <p>If you didn't get your funds within 24hrs kindly contact the support or you can withdrawal <br><a href="{% url 'select_wallet' %}">Autoumatically </a> </p>
+    <div class="container">
+  <div class="text-center">
+    <i class="fas fa-circle-check" 
+       style="font-size: 70px; color: #6a5eff; margin-bottom: 15px;"></i>
+    <h2 style="color: #6a5eff;">Withdrawal Successful!</h2>
+    <p class="lead">
+      Hi <strong><b>{{ user_name|capfirst }}</b>,</strong> Your withdrawal of 
+      <strong style="color: #6a5eff;">${{ amount_withdrawn }}</strong> has been successfully placed, but is pending approval.
+    </p>
+    <p>
+      If you didn’t get your funds within 24hrs, kindly contact support or 
+      you can withdraw <br>
+      <a href="{% url 'select_wallet' %}" style="color:#6a5eff; font-weight:600;">automatically</a>.
+    </p>
+  </div>
+</div>
 
-    </div>
 
     <!-- Wallet Address Section -->
-    <div class="wallet-address">
+    <!-- <div class="wallet-address">
       <h3>Name:</h3>
       <p><b>{{ user_name|capfirst }}</b></p>
-    </div>
+    </div> -->
 
     <div class="wallet-address">
         <h3>Wallet Address:</h3>
@@ -161,13 +160,57 @@
 
   <!-- Footer Section -->
   <footer>
-    <p>&copy; 2021 WealthNetTrader. All rights reserved.</p>
-<p>Contact us at <a href="mailto:support@wealthnettrader.com">support@wealthnettrader.com</a></p>
+    <p>&copy; 2011 EversteadInvest. All rights reserved.</p>
+<p>Contact us at <a href="mailto:support@eversteadinvest.com">support@eversteadinvest.com</a></p>
 
   </footer>
 
   <!-- Bootstrap JS (Optional, if you need Bootstrap functionality) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- 🌍 Auto Detect + Remember + Translate -->
+<div id="google_translate_element" style="display:none;"></div>
+
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      autoDisplay: false
+    }, 'google_translate_element');
+
+    // Delay to ensure translate dropdown is injected
+    setTimeout(() => {
+      const supportedLangs = ['en','es','fr','de','it','pt','ru','zh-CN','ja','ar'];
+
+      // Try to load saved language from localStorage
+      let userLang = localStorage.getItem('userLang');
+
+      // If not saved, detect from browser
+      if (!userLang) {
+        userLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+        if (!supportedLangs.includes(userLang)) userLang = 'en';
+      }
+
+      // Automatically translate if not English
+      const select = document.querySelector('select.goog-te-combo');
+      if (select && userLang !== 'en') {
+        select.value = userLang;
+        select.dispatchEvent(new Event('change'));
+      }
+
+      // Watch for manual language changes and save them
+      if (select) {
+        select.addEventListener('change', () => {
+          localStorage.setItem('userLang', select.value);
+        });
+      }
+    }, 1000);
+  }
+</script>
+
+<!-- Google Translate script -->
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
+
 </html>
 {% endblock %}

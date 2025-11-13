@@ -439,4 +439,47 @@
     <!-- //Js scripts -->
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'999d9dfc6982b546',t:'MTc2MjM1ODk4Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 
+<!-- 🌍 Auto Detect + Remember + Translate -->
+<div id="google_translate_element" style="display:none;"></div>
+
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      autoDisplay: false
+    }, 'google_translate_element');
+
+    // Delay to ensure translate dropdown is injected
+    setTimeout(() => {
+      const supportedLangs = ['en','es','fr','de','it','pt','ru','zh-CN','ja','ar'];
+
+      // Try to load saved language from localStorage
+      let userLang = localStorage.getItem('userLang');
+
+      // If not saved, detect from browser
+      if (!userLang) {
+        userLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+        if (!supportedLangs.includes(userLang)) userLang = 'en';
+      }
+
+      // Automatically translate if not English
+      const select = document.querySelector('select.goog-te-combo');
+      if (select && userLang !== 'en') {
+        select.value = userLang;
+        select.dispatchEvent(new Event('change'));
+      }
+
+      // Watch for manual language changes and save them
+      if (select) {
+        select.addEventListener('change', () => {
+          localStorage.setItem('userLang', select.value);
+        });
+      }
+    }, 1000);
+  }
+</script>
+
+<!-- Google Translate script -->
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </html>

@@ -43,8 +43,6 @@
             color: var(--dark-text);
         }
 
-        
-
         .bar:nth-child(2) { animation-delay: 0.1s; }
         .bar:nth-child(3) { animation-delay: 0.2s; }
         .bar:nth-child(4) { animation-delay: 0.3s; }
@@ -59,6 +57,7 @@
             padding: 15px 20px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             z-index: 100;
             background-color: var(--light-bg);
             border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -99,10 +98,16 @@
             color: #ff6b6b;
         }
 
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
         .register-container {
             width: 100%;
             max-width: 450px;
-            margin-top: 70px;
+            margin-top: 110px;
         }
 
         .register-card {
@@ -329,6 +334,7 @@
             border: none;
             font-size: 0.95rem;
         }
+        
 
         .btn-prev {
             background-color: #e9ecef;
@@ -336,7 +342,7 @@
         }
 
         body.dark-mode .btn-prev {
-            background-color: #2d3748;
+            background-color: #2d3748 !important;
             color: #e2e8f0;
         }
 
@@ -345,7 +351,7 @@
         }
 
         body.dark-mode .btn-prev:hover {
-            background-color: #4a5568;
+            background-color: #4a5568 !important;
         }
 
         .btn-next, .btn-submit {
@@ -399,25 +405,65 @@
         .login-link a:hover {
             text-decoration: underline;
         }
-    
-.theme-toggle {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    background: none; /* removed background color */
-    color: inherit; /* uses default text/icon color */
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
+
+        .theme-toggle {
+            background: none;
+            color: inherit;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Google Translate Styles */
+        #custom_translate_wrapper {
+            position: relative;
+        }
+
+        #custom_lang_icon {
+            font-size: 1.2rem;
+            color: #f5202a;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            transition: var(--transition);
+        }
+
+        #custom_lang_icon:hover {
+            transform: scale(1.1);
+        }
+
+        #custom_google_translate {
+            display: none;
+            position: absolute;
+            top: 42px;
+            right: 0;
+            background: #fff;
+            border-radius: 6px;
+            padding: 5px 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+            z-index: 9999;
+            transition: all 0.3s ease-in-out;
+        }
+
+        body.dark-mode #custom_google_translate {
+            background: #1e1e1e !important;
+            color: #fff !important;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        body.dark-mode #custom_lang_icon {
+            color: #ff6b6b !important;
+        }
 
         .error-message {
             color: #f52029;
@@ -476,6 +522,59 @@
             color: #aaa;
         }
 
+        /* Preloader Styles */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #0a0a0a 15%, #000 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .preloader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .preloader-icon {
+            font-size: 60px;
+            color: #eb252f;
+            animation: linePulse 1.8s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px #eb252f);
+        }
+
+        .preloader-text {
+            color: #eb252f;
+            font-family: "Poppins", sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px #eb252f, 0 0 20px #ff4a5c;
+            animation: glowText 2s infinite alternate;
+        }
+
+        @keyframes linePulse {
+            0% { transform: scale(1) translateY(0); opacity: 0.9; }
+            50% { transform: scale(1.15) translateY(-4px); opacity: 1; }
+            100% { transform: scale(1) translateY(0); opacity: 0.9; }
+        }
+
+        @keyframes glowText {
+            0% { opacity: 0.7; text-shadow: 0 0 10px #eb252f; }
+            100% { opacity: 1; text-shadow: 0 0 25px #ff4a5c; }
+        }
+
+        body.loaded #preloader {
+            opacity: 0;
+            visibility: hidden;
+        }
+
         /* Responsive Design */
         @media (max-width: 480px) {
             body {
@@ -496,8 +595,12 @@
                 font-size: 1.1rem;
             }
             
+            .header-controls {
+                gap: 10px;
+            }
+            
             .register-container {
-                margin-top: 60px;
+                margin-top: 100px;
             }
             
             .register-card {
@@ -522,8 +625,12 @@
                 width: 40px;
                 height: 40px;
                 font-size: 1rem;
-                top: 12px;
-                right: 12px;
+            }
+
+            #custom_lang_icon {
+                width: 32px;
+                height: 32px;
+                font-size: 1.1rem;
             }
 
             .step-icon {
@@ -554,101 +661,46 @@
                 flex: 1;
                 min-width: 80px;
             }
+            
+            .header-controls {
+                gap: 8px;
+            }
         }
     </style>
 </head>
 <body>
-   <!-- Preloader -->
-<div id="preloader">
-  <div class="preloader-content">
-    <i class="fa fa-line-chart preloader-icon" aria-hidden="true"></i>
-    <h2 class="preloader-text">EversteadInvest</h2>
-  </div>
-</div>
-
-<style>
-  /* Fullscreen Preloader */
-#preloader {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at center, #0a0a0a 15%, #000 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 9999;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
-}
-
-/* Content Wrapper */
-.preloader-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Line Chart Icon */
-.preloader-icon {
-  font-size: 60px; /* smaller size */
-  color: #eb252f;
-  animation: linePulse 1.8s ease-in-out infinite;
-  filter: drop-shadow(0 0 8px #eb252f);
-}
-
-/* Company Name */
-.preloader-text {
-  color: #eb252f;
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  text-shadow: 0 0 10px #eb252f, 0 0 20px #ff4a5c;
-  animation: glowText 2s infinite alternate;
-}
-
-/* Line chart bounce animation */
-@keyframes linePulse {
-  0% { transform: scale(1) translateY(0); opacity: 0.9; }
-  50% { transform: scale(1.15) translateY(-4px); opacity: 1; }
-  100% { transform: scale(1) translateY(0); opacity: 0.9; }
-}
-
-/* Glowing text animation */
-@keyframes glowText {
-  0% { opacity: 0.7; text-shadow: 0 0 10px #eb252f; }
-  100% { opacity: 1; text-shadow: 0 0 25px #ff4a5c; }
-}
-
-/* Hide preloader when body has .loaded */
-body.loaded #preloader {
-  opacity: 0;
-  visibility: hidden;
-}
-
-</style>
-
-<script>
-  window.addEventListener("load", () => {
-    document.body.classList.add("loaded");
-  });
-</script>
-
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <i class="fa fa-line-chart preloader-icon" aria-hidden="true"></i>
+            <h2 class="preloader-text">EversteadInvest</h2>
+        </div>
+    </div>
 
     <!-- Header with Logo -->
     <header class="header">
-         <div class="logo-container">
-        <a class="navbar-brand" href="{% url 'home' %}">
-            <img src="{% static 'images/logo.png' %}" alt="EversteadInvest Logo" style="height:60px; max-width:100%; object-fit:contain;">
-        </a>
-    </div>
+        <div class="logo-container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="EversteadInvest Logo" style="height:60px; max-width:100%; object-fit:contain;">
+            </a>
+        </div>
+
+        <!-- Google Translate Widget - Centered in nav -->
+        <div class="header-controls">
+            <div id="custom_translate_wrapper">
+                <div id="custom_lang_icon" onclick="toggleCustomTranslate()">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div id="custom_google_translate"></div>
+            </div>
+
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
     </header>
 
-    <button class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-    </button>
-
-   <div class="register-container" style="margin-top: 110px;">
+    <div class="register-container">
         <div class="register-card">
             <div class="register-header">
                 <h1>Create Account</h1>
@@ -803,20 +855,20 @@ body.loaded #preloader {
 
                 <!-- Navigation Buttons -->
                 <div class="nav-buttons">
-                    <button type="button" id="prev-btn" class="btn btn-prev" style="display: none;">
+                    <button type="button" id="prev-btn" class="btn btn-prev btn1" style="display: none;">
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
-                    <button type="button" id="next-btn" class="btn btn-next">
+                    <button type="button" id="next-btn" class="btn btn-next"  style="background: linear-gradient(135deg, #eb252f 0%, #a832a3 50%, #610606 100%) !important;">
                         Next <i class="fas fa-arrow-right"></i>
                     </button>
-                    <button type="submit" id="submit-btn" class="btn btn-submit" style="display: none;">
+                    <button type="submit" id="submit-btn" class="btn btn-submit btn1" style="display: none;background: linear-gradient(135deg, #eb252f 0%, #a832a3 50%, #610606 100%) !important;" >
                         Create Account
                     </button>
                 </div>
             </form>
 
             <div class="login-link">
-                Already have an account? <a href="{% url 'userprofile:login' %}">Sign In</a>
+                Already have <b>Wallet? </b><a href="{% url 'userprofile:login' %}">Sign In</a>
             </div>
         </div>
     </div>
@@ -824,13 +876,7 @@ body.loaded #preloader {
     <script>
         // Preloader
         window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            setTimeout(function() {
-                preloader.classList.add('fade-out');
-                setTimeout(function() {
-                    preloader.style.display = 'none';
-                }, 700);
-            }, 700);
+            document.body.classList.add("loaded");
         });
 
         // Theme toggle functionality
@@ -934,6 +980,38 @@ body.loaded #preloader {
             });
         });
 
+        // Google Translate Functions
+        function toggleCustomTranslate() {
+            const el = document.getElementById("custom_google_translate");
+            if (el.style.display === "block") {
+                el.style.opacity = 0;
+                setTimeout(() => el.style.display = "none", 300);
+            } else {
+                el.style.display = "block";
+                setTimeout(() => el.style.opacity = 1, 10);
+            }
+        }
+
+        function customGoogleTranslateInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ru,zh-CN,ja,ar',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'custom_google_translate');
+            
+            // Close translate dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                const translateWrapper = document.getElementById('custom_translate_wrapper');
+                const translateDropdown = document.getElementById('custom_google_translate');
+                const translateIcon = document.getElementById('custom_lang_icon');
+                
+                if (!translateWrapper.contains(event.target) && translateDropdown.style.display === 'block') {
+                    translateDropdown.style.opacity = 0;
+                    setTimeout(() => translateDropdown.style.display = 'none', 300);
+                }
+            });
+        }
+
         // Form submission
         document.getElementById('registration-form').addEventListener('submit', function(e) {
             const password = document.getElementById('id_password1').value;
@@ -955,5 +1033,8 @@ body.loaded #preloader {
         // Initialize the form
         showStep(currentStep);
     </script>
+
+    <!-- Google Translate Script -->
+    <script src="//translate.google.com/translate_a/element.js?cb=customGoogleTranslateInit"></script>
 </body>
 </html>

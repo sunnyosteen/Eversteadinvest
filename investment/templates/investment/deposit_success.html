@@ -43,7 +43,7 @@
                         padding: 10px 10px;
                         color: #ffffff;
                         /* background-color: #2D60FF; */
-                        background: linear-gradient(135deg,  #eb252f 0%, #ac122b );
+                        background: linear-gradient(135deg, #eb252f 0%, #a832a3 50%, #610606 100%) !important;
                         cursor: pointer;
                         border: none;
                         margin-top: 6px;
@@ -58,7 +58,7 @@
                         padding: 10px 5px;
                         color: #ffffff;
                         /* background-color: #2D60FF; */
-                        background: linear-gradient(135deg,  #eb252f 0%, #ac122b );
+                        background: linear-gradient(135deg, #eb252f 0%, #a832a3 50%, #610606 100%) !important;
                         cursor: pointer;
                         border: none;
                         margin-top: 6px;
@@ -78,6 +78,26 @@
 
     <!-- Main Content -->
   
+    <style>
+.fas.fa-circle-check {
+  animation: successPop 0.6s ease-in-out;
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</style>
+
         
 <div class="tradingview-widget-container">
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
@@ -145,56 +165,68 @@
 </h2> -->
  
     <div class="container mt-5">
-        <div class="card shadow-lg p-4">
-            <div class="text-center">
-              <h2 class="mb-4 text-success">
-                <i class="bi bi-clock" style="font-size: 1.5rem; margin-right: 8px;"></i> Complete your Deposit
-            </h2>
-            
-                     
-                <p class="lead">Hi <strong><b>{{ user_name|capfirst }}</b></strong>, A deposit of  <strong class="text-success"><b><span class="text-muted text-success">$</span>{{ deposit_amount }}</b></strong> has been successfully placed</p>
-                <p> kindly copy the address below and complete the transfer using your exchange/crypto wallet</p>
-                <p class="text-muted">Transaction Fee : <b>0.00</b></p>
-                <div class="countdown-box">
-                  <p class="expiry-text">Expires: <b id="countdown-text">01:00:00</b></p>
-              </div>
-            </div>
+       <div class="card shadow-lg p-4">
+  <div class="text-center">
+    <!-- Success Icon -->
+    <i class="fas fa-circle-check text-success" 
+       style="font-size: 65px; margin-bottom: 15px; filter: drop-shadow(0 0 6px rgba(25,135,84,0.4));"></i>
 
-            <!-- Wallet Address Section -->
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h3 class="card-title">Wallet Address:</h3>
-                    <div class="input-group mb-3">
-                        <input type="text" id="walletAddress" class="form-control" value="{{ wallet_address }}" readonly>
-                        <button class="btn copy_btn"  onclick="copyWalletAddress()">
-                            <i class="fas fa-copy"></i> Copy
-                        </button>
-                    </div>
-                    <p class="text-muted">Click the "Copy" button to copy the wallet address.</p>
-                </div>
-            </div>
+    <h2 class="mb-4 text-success">
+      <i class="bi bi-clock" style="font-size: 1.5rem; margin-right: 8px;"></i>
+      Complete your Deposit
+    </h2>
 
-            <!-- Wallet Name Section -->
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h3 class="card-title">Wallet Name:</h3>
-                    <p class="lead">{{ wallet_name }}</p>
-                </div>
-            </div>
+    <p class="lead">
+      Hi <strong><b>{{ user_name|capfirst }}</b></strong>, 
+      A deposit of <strong class="text-success">
+        <b><span class="text-muted text-success">$</span>{{ deposit_amount }}</b>
+      </strong> has been successfully placed.
+    </p>
+    <p>Kindly copy the address below and complete the transfer using your exchange/crypto wallet.</p>
+    <p class="text-muted">Transaction Fee : <b>0.00</b></p>
 
-            <!-- Instructions -->
-            <div class="mt-4 text-center">
-                <p class="text-muted">Please complete the transaction on your exchange platform.</p>
-                <a href="{% url 'userprofile:dashboard' %}" class="dashboard_btn" style="text-decoration:none;">
-                    <i class="fas fa-arrow-left"></i> Return to Your Dashboard
-                </a>
-            </div>
-        </div>
+    <!-- Countdown -->
+    <div class="countdown-box">
+      <p class="expiry-text">Expires: <b id="countdown-text">01:00:00</b></p>
+    </div>
+  </div>
+
+  <!-- Wallet Address Section -->
+  <div class="card mt-4">
+    <div class="card-body">
+      <h3 class="card-title">Wallet Address:</h3>
+      <div class="input-group mb-3">
+        <input type="text" id="walletAddress" class="form-control" value="{{ wallet_address }}" readonly>
+        <button class="btn copy_btn" onclick="copyWalletAddress()">
+          <i class="fas fa-copy"></i> Copy
+        </button>
+      </div>
+      <p class="text-muted">Click the "Copy" button to copy the wallet address.</p>
+    </div>
+  </div>
+
+  <!-- Wallet Name Section -->
+  <div class="card mt-4">
+    <div class="card-body">
+      <h3 class="card-title">Wallet Name:</h3>
+      <p class="lead">{{ wallet_name }}</p>
+    </div>
+  </div>
+
+  <!-- Instructions -->
+  <div class="mt-4 text-center">
+    <p class="text-muted">Please complete the transaction on your exchange platform.</p>
+    <a href="{% url 'userprofile:dashboard' %}" class="dashboard_btn" style="text-decoration:none;">
+      <i class="fas fa-arrow-left"></i> Return to Your Dashboard
+    </a>
+  </div>
+</div>
+
     </div>
 
     <!-- Footer Section -->
     <footer>
-       <p>&copy; 2021 WealthNetTrader. All rights reserved.</p>
+       <p>&copy; 2011 EversteadInvest. All rights reserved.</p>
 <p>Contact us at <a href="mailto:support@eversteadinvest.com">support@eversteadinvest.com</a></p>
 
     </footer>
@@ -245,5 +277,48 @@
 
     <!-- Bootstrap JS (Optional, if you need Bootstrap functionality) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 🌍 Auto Detect + Remember + Translate -->
+<div id="google_translate_element" style="display:none;"></div>
+
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      autoDisplay: false
+    }, 'google_translate_element');
+
+    // Delay to ensure translate dropdown is injected
+    setTimeout(() => {
+      const supportedLangs = ['en','es','fr','de','it','pt','ru','zh-CN','ja','ar'];
+
+      // Try to load saved language from localStorage
+      let userLang = localStorage.getItem('userLang');
+
+      // If not saved, detect from browser
+      if (!userLang) {
+        userLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+        if (!supportedLangs.includes(userLang)) userLang = 'en';
+      }
+
+      // Automatically translate if not English
+      const select = document.querySelector('select.goog-te-combo');
+      if (select && userLang !== 'en') {
+        select.value = userLang;
+        select.dispatchEvent(new Event('change'));
+      }
+
+      // Watch for manual language changes and save them
+      if (select) {
+        select.addEventListener('change', () => {
+          localStorage.setItem('userLang', select.value);
+        });
+      }
+    }, 1000);
+  }
+</script>
+
+<!-- Google Translate script -->
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
